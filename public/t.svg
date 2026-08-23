@@ -1,0 +1,52 @@
+<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- The "N" Monogram - Standalone Icon -->
+  <g>
+    <!-- Left ascending stroke -->
+    <path 
+      d="M16 68 L16 12 L28 12" 
+      stroke="#1B4F72" 
+      strokeWidth="10" 
+      strokeLinecap="round" 
+      strokeLinejoin="round"
+      fill="none"
+    />
+    
+    <!-- The diagonal cut -->
+    <path 
+      d="M28 12 L66 50 L66 40" 
+      stroke="#1B4F72" 
+      strokeWidth="10" 
+      strokeLinecap="round" 
+      strokeLinejoin="round"
+      fill="none"
+    />
+    
+    <!-- Right structural stroke -->
+    <path 
+      d="M66 50 L66 68" 
+      stroke="#1B4F72" 
+      strokeWidth="10" 
+      strokeLinecap="round" 
+      strokeLinejoin="round"
+      fill="none"
+    />
+    
+    <!-- Crossbar -->
+    <path 
+      d="M16 42 L66 42" 
+      stroke="#1B4F72" 
+      strokeWidth="8" 
+      strokeLinecap="round" 
+      fill="none"
+      opacity="0.12"
+    />
+    
+    <!-- Precision point -->
+    <circle 
+      cx="66" 
+      cy="50" 
+      r="5" 
+      fill="#1B4F72"
+    />
+  </g>
+</svg>

@@ -1,0 +1,75 @@
+<svg viewBox="0 0 240 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- White Background -->
+  <rect x="0" y="0" width="240" height="80" fill="#FFFFFF" rx="8"/>
+  
+  <!-- The "N" Monogram -->
+  <g transform="translate(0, 0)">
+    <path 
+      d="M12 52 L12 12" 
+      stroke="#1B4F72" 
+      strokeWidth="8" 
+      strokeLinecap="round" 
+      strokeLinejoin="round"
+      fill="none"
+    />
+    <path 
+      d="M12 12 L28 28" 
+      stroke="#1B4F72" 
+      strokeWidth="8" 
+      strokeLinecap="round" 
+      strokeLinejoin="round"
+      fill="none"
+    />
+    <path 
+      d="M32 32 L56 48" 
+      stroke="#1B4F72" 
+      strokeWidth="8" 
+      strokeLinecap="round" 
+      strokeLinejoin="round"
+      fill="none"
+    />
+    <path 
+      d="M56 12 L56 52" 
+      stroke="#1B4F72" 
+      strokeWidth="8" 
+      strokeLinecap="round" 
+      strokeLinejoin="round"
+      fill="none"
+    />
+    <path 
+      d="M12 38 L56 38" 
+      stroke="#1B4F72" 
+      strokeWidth="4" 
+      strokeLinecap="round" 
+      fill="none"
+      opacity="0.15"
+    />
+    <circle cx="12" cy="12" r="4" fill="#1B4F72" />
+    <circle cx="56" cy="12" r="4" fill="#1B4F72" />
+    <circle cx="56" cy="52" r="4" fill="#1B4F72" />
+    <circle cx="28" cy="28" r="3.5" fill="#1B4F72" />
+    <circle cx="32" cy="32" r="3.5" fill="#1B4F72" />
+  </g>
+  
+  <!-- Wordmark -->
+  <text 
+    x="75" 
+    y="36" 
+    font-family="'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+    font-size="28" 
+    font-weight="700" 
+    letter-spacing="2" 
+    fill="#1B4F72"
+  >NORM</text>
+  
+  <!-- Tagline -->
+  <text 
+    x="75" 
+    y="52" 
+    font-family="'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+    font-size="11" 
+    font-weight="400" 
+    letter-spacing="3" 
+    fill="#5A6570"
+  >UNDERSTAND. MONITOR. MANAGE.</text>
+</svg>

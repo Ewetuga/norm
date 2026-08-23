@@ -1,0 +1,542 @@
+/* ========================================
+   RECORDS PAGE - NORM BRAND
+   ======================================== */
+
+.records-page {
+  max-width: 100%;
+  padding-bottom: 20px;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- HEADER ---------- */
+.records-header {
+  margin-bottom: 20px;
+}
+
+.records-header h1 {
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 700;
+  color: #1B4F72;
+  font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+.records-header .text-muted {
+  font-size: clamp(14px, 1.5vw, 16px);
+  color: #5A6570;
+  font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+/* ---------- QUICK ACTIONS ---------- */
+.records-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.records-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Poppins', 'Inter', sans-serif;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.records-actions .btn-icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.records-actions .btn-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.records-actions .btn-primary {
+  background: #1B4F72;
+  color: #F7F7F4;
+  border: none;
+  box-shadow: 0 2px 12px rgba(27, 79, 114, 0.2);
+}
+
+.records-actions .btn-primary:hover {
+  background: #0e3a54;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(27, 79, 114, 0.3);
+}
+
+.records-actions .btn-outline {
+  background: transparent;
+  color: #1B4F72;
+  border: 2px solid #1B4F72;
+}
+
+.records-actions .btn-outline:hover {
+  background: #1B4F72;
+  color: #F7F7F4;
+  transform: translateY(-2px);
+}
+
+/* ---------- TABS ---------- */
+.records-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+  padding: 4px 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.records-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-btn {
+  padding: 6px 16px;
+  border: none;
+  background: transparent;
+  color: #5A6570;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Poppins', 'Inter', sans-serif;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  background: rgba(27, 79, 114, 0.04);
+  color: #1B4F72;
+}
+
+.tab-btn.active {
+  background: #1B4F72;
+  color: #F7F7F4;
+}
+
+/* ---------- RECORDS LIST ---------- */
+.records-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.record-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  background: #F7F7F4;
+  border-radius: 12px;
+  border: 1px solid rgba(27, 79, 114, 0.06);
+  transition: all 0.3s ease;
+}
+
+.record-item:hover {
+  box-shadow: 0 4px 16px rgba(27, 79, 114, 0.06);
+  transform: translateX(4px);
+}
+
+.record-item-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.record-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background: rgba(27, 79, 114, 0.06);
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.record-item-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: #1B4F72;
+}
+
+.record-item-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.record-item-info h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1A1A1A;
+  font-family: 'Poppins', 'Inter', sans-serif;
+  margin: 0;
+}
+
+.record-item-category {
+  font-size: 12px;
+  color: #5A6570;
+  font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+.record-item-date {
+  font-size: 12px;
+  color: #8A94A0;
+  font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+.record-item-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.record-item-notes {
+  font-size: 13px;
+  color: #5A6570;
+  font-family: 'Poppins', 'Inter', sans-serif;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.record-item-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-icon-only {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-icon-only svg {
+  width: 18px;
+  height: 18px;
+  stroke: #5A6570;
+  transition: stroke 0.3s ease;
+}
+
+.btn-icon-only:hover {
+  background: rgba(27, 79, 114, 0.06);
+}
+
+.btn-icon-only:hover svg {
+  stroke: #1B4F72;
+}
+
+.btn-icon-only.delete:hover {
+  background: rgba(192, 57, 43, 0.08);
+}
+
+.btn-icon-only.delete:hover svg {
+  stroke: #C0392B;
+}
+
+/* ---------- EMPTY STATE ---------- */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 20px;
+  background: rgba(27, 79, 114, 0.02);
+  border-radius: 12px;
+  border: 2px dashed rgba(27, 79, 114, 0.08);
+}
+
+.empty-state-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(27, 79, 114, 0.06);
+  border-radius: 16px;
+  margin-bottom: 16px;
+}
+
+.empty-state-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: #1B4F72;
+}
+
+.empty-state h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1A1A1A;
+  font-family: 'Poppins', 'Inter', sans-serif;
+  margin-bottom: 4px;
+}
+
+.empty-state .text-muted {
+  font-size: 14px;
+  color: #5A6570;
+  font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+/* ---------- FILE UPLOAD ---------- */
+.file-upload-wrapper {
+  position: relative;
+}
+
+.file-input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.file-upload-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border: 2px dashed rgba(27, 79, 114, 0.15);
+  border-radius: 10px;
+  background: rgba(27, 79, 114, 0.02);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.file-upload-label:hover {
+  border-color: #1B4F72;
+  background: rgba(27, 79, 114, 0.04);
+}
+
+.file-upload-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: #1B4F72;
+}
+
+.file-upload-text {
+  font-size: 14px;
+  color: #5A6570;
+  font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+  .record-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .record-item-right {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .record-item-notes {
+    max-width: 100%;
+  }
+
+  .records-actions {
+    flex-direction: column;
+  }
+
+  .records-actions .btn {
+    justify-content: center;
+  }
+
+  .record-item-left {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .records-tabs {
+    gap: 4px;
+  }
+
+  .tab-btn {
+    font-size: 12px;
+    padding: 4px 12px;
+  }
+
+  .record-item {
+    padding: 12px 14px;
+  }
+
+  .record-item-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .record-item-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .record-item-info h4 {
+    font-size: 14px;
+  }
+
+  .file-upload-label {
+    padding: 12px 16px;
+  }
+}
+
+/* ---------- DARK MODE ---------- */
+@media (prefers-color-scheme: dark) {
+  .records-header h1 {
+    color: #E08E5B;
+  }
+
+  .records-header .text-muted {
+    color: #8A94A0;
+  }
+
+  .records-actions .btn-primary {
+    background: #E08E5B;
+    color: #1A1A2E;
+    box-shadow: 0 2px 12px rgba(224, 142, 91, 0.2);
+  }
+
+  .records-actions .btn-primary:hover {
+    background: #d47a4a;
+  }
+
+  .records-actions .btn-outline {
+    color: #E08E5B;
+    border-color: #E08E5B;
+  }
+
+  .records-actions .btn-outline:hover {
+    background: #E08E5B;
+    color: #1A1A2E;
+  }
+
+  .tab-btn {
+    color: #8A94A0;
+  }
+
+  .tab-btn:hover {
+    color: #E08E5B;
+    background: rgba(224, 142, 91, 0.08);
+  }
+
+  .tab-btn.active {
+    background: #E08E5B;
+    color: #1A1A2E;
+  }
+
+  .record-item {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .record-item:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .record-item-icon {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .record-item-icon svg {
+    stroke: #E08E5B;
+  }
+
+  .record-item-info h4 {
+    color: #E2E8F0;
+  }
+
+  .record-item-category {
+    color: #8A94A0;
+  }
+
+  .record-item-date {
+    color: #718096;
+  }
+
+  .record-item-notes {
+    color: #8A94A0;
+  }
+
+  .btn-icon-only svg {
+    stroke: #8A94A0;
+  }
+
+  .btn-icon-only:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .btn-icon-only:hover svg {
+    stroke: #E08E5B;
+  }
+
+  .btn-icon-only.delete:hover {
+    background: rgba(192, 57, 43, 0.15);
+  }
+
+  .empty-state {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .empty-state-icon {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .empty-state-icon svg {
+    stroke: #E08E5B;
+  }
+
+  .empty-state h3 {
+    color: #E2E8F0;
+  }
+
+  .file-upload-label {
+    border-color: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .file-upload-label:hover {
+    border-color: #E08E5B;
+    background: rgba(224, 142, 91, 0.04);
+  }
+
+  .file-upload-icon svg {
+    stroke: #E08E5B;
+  }
+
+  .file-upload-text {
+    color: #8A94A0;
+  }
+}

@@ -1,0 +1,64 @@
+<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- White Background -->
+  <rect x="0" y="0" width="32" height="32" fill="#FFFFFF" rx="6"/>
+  
+  <!-- The "N" Monogram with SVG breaks -->
+  <g transform="translate(0, 0)">
+    <!-- Left stroke -->
+    <path 
+      d="M6 26 L6 6" 
+      stroke="#1B4F72" 
+      strokeWidth="4" 
+      strokeLinecap="round" 
+      strokeLinejoin="round"
+      fill="none"
+    />
+    
+    <!-- Diagonal stroke - top segment -->
+    <path 
+      d="M6 6 L14 14" 
+      stroke="#1B4F72" 
+      strokeWidth="4" 
+      strokeLinecap="round" 
+      strokeLinejoin="round"
+      fill="none"
+    />
+    
+    <!-- Diagonal stroke - bottom segment (with gap) -->
+    <path 
+      d="M17 17 L25 25" 
+      stroke="#1B4F72" 
+      strokeWidth="4" 
+      strokeLinecap="round" 
+      strokeLinejoin="round"
+      fill="none"
+    />
+    
+    <!-- Right stroke -->
+    <path 
+      d="M25 6 L25 26" 
+      stroke="#1B4F72" 
+      strokeWidth="4" 
+      strokeLinecap="round" 
+      strokeLinejoin="round"
+      fill="none"
+    />
+    
+    <!-- Crossbar - thin connecting line -->
+    <path 
+      d="M6 17 L25 17" 
+      stroke="#1B4F72" 
+      strokeWidth="2" 
+      strokeLinecap="round" 
+      fill="none"
+      opacity="0.12"
+    />
+    
+    <!-- Anchor dots -->
+    <circle cx="6" cy="6" r="2" fill="#1B4F72" />
+    <circle cx="25" cy="6" r="2" fill="#1B4F72" />
+    <circle cx="25" cy="26" r="2" fill="#1B4F72" />
+    <circle cx="14" cy="14" r="1.8" fill="#1B4F72" />
+    <circle cx="17" cy="17" r="1.8" fill="#1B4F72" />
+  </g>
+</svg>
