@@ -44,7 +44,7 @@
   padding: 20px 24px;
   margin-bottom: 16px;
   background: #F7F7F4;
-  border-radius: var(--radius);
+  border-radius: 12px;
   border: 1px solid rgba(17, 87, 97, 0.08);
   box-shadow: 0 2px 12px rgba(17, 87, 97, 0.06);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -231,7 +231,7 @@
   display: flex;
   flex-direction: column;
   background: #F7F7F4;
-  border-radius: var(--radius);
+  border-radius: 12px;
   border: 1px solid rgba(17, 87, 97, 0.04);
   box-shadow: 0 2px 8px rgba(17, 87, 97, 0.03);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -349,7 +349,7 @@
   margin-bottom: 16px;
   background: rgba(17, 87, 97, 0.03);
   border: 1px solid rgba(17, 87, 97, 0.06);
-  border-radius: var(--radius);
+  border-radius: 12px;
   box-shadow: 0 2px 8px rgba(17, 87, 97, 0.02);
   transition: all 0.3s ease;
 }
@@ -388,7 +388,7 @@
   gap: 4px;
   padding: 14px 6px;
   background: #F7F7F4;
-  border-radius: var(--radius-sm);
+  border-radius: 8px;
   text-decoration: none;
   color: #1A1A1A;
   border: 1px solid rgba(17, 87, 97, 0.06);
@@ -441,7 +441,7 @@
   align-items: center;
   background: rgba(17, 87, 97, 0.03);
   border: 1px solid rgba(17, 87, 97, 0.06);
-  border-radius: var(--radius);
+  border-radius: 12px;
   box-shadow: 0 1px 4px rgba(17, 87, 97, 0.02);
   transition: all 0.3s ease;
 }
@@ -737,19 +737,20 @@
   .tip-icon svg { color: #E08E5B; stroke: #E08E5B; }
   .greeting-icon svg { color: #E08E5B; stroke: #E08E5B; }
 }
+
 /* ---------- CHART CARD ---------- */
 .chart-card {
   padding: 16px 20px;
   margin-bottom: 16px;
-  background: var(--surface);
-  border-radius: var(--radius);
+  background: #FFFFFF;
+  border-radius: 12px;
   border: 1px solid rgba(27, 79, 114, 0.06);
 }
 
 .chart-card h3 {
   font-size: 16px;
   font-weight: 600;
-  color: var(--text-primary);
+  color: #1A1A1A;
   margin-bottom: 12px;
   font-family: 'Poppins', 'Inter', sans-serif;
 }
@@ -766,7 +767,7 @@
   flex-direction: column;
   justify-content: space-between;
   font-size: 10px;
-  color: var(--text-muted);
+  color: #8A94A0;
   padding: 4px 0;
   min-width: 30px;
   font-family: 'Poppins', 'Inter', sans-serif;
@@ -788,7 +789,7 @@
   justify-content: space-between;
   padding: 4px 0 0;
   font-size: 10px;
-  color: var(--text-muted);
+  color: #8A94A0;
   font-family: 'Poppins', 'Inter', sans-serif;
 }
 
@@ -809,7 +810,7 @@
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  color: var(--text-secondary);
+  color: #5A6570;
   font-family: 'Poppins', 'Inter', sans-serif;
 }
 
@@ -829,7 +830,7 @@
 
 .bp-readings-count {
   font-size: 13px;
-  color: var(--text-muted);
+  color: #8A94A0;
   font-family: 'Poppins', 'Inter', sans-serif;
 }
 
@@ -1156,8 +1157,8 @@
 .history-card {
   padding: 16px 20px;
   margin-bottom: 16px;
-  background: var(--surface);
-  border-radius: var(--radius);
+  background: #FFFFFF;
+  border-radius: 12px;
   border: 1px solid rgba(27, 79, 114, 0.06);
 }
 
@@ -1174,7 +1175,7 @@
   gap: 8px;
   font-size: 16px;
   font-weight: 600;
-  color: var(--text-primary);
+  color: #1A1A1A;
   font-family: 'Poppins', 'Inter', sans-serif;
 }
 
@@ -1186,12 +1187,12 @@
 .history-icon svg {
   width: 18px;
   height: 18px;
-  stroke: var(--text-secondary);
+  stroke: #5A6570;
 }
 
 .history-count {
   font-size: 13px;
-  color: var(--text-muted);
+  color: #8A94A0;
   font-family: 'Poppins', 'Inter', sans-serif;
 }
 
@@ -1238,13 +1239,13 @@
 .history-item-date {
   font-size: 14px;
   font-weight: 500;
-  color: var(--text-primary);
+  color: #1A1A1A;
   font-family: 'Poppins', 'Inter', sans-serif;
 }
 
 .history-item-time {
   font-size: 12px;
-  color: var(--text-muted);
+  color: #8A94A0;
   font-family: 'Poppins', 'Inter', sans-serif;
 }
 
@@ -1257,25 +1258,25 @@
 .history-item-sys {
   font-size: 18px;
   font-weight: 600;
-  color: var(--primary);
+  color: #115761;
   font-family: 'Poppins', 'Inter', sans-serif;
 }
 
 .history-item-dia {
   font-size: 18px;
   font-weight: 600;
-  color: var(--primary);
+  color: #115761;
   font-family: 'Poppins', 'Inter', sans-serif;
 }
 
 .history-item-divider {
   font-size: 16px;
-  color: var(--text-muted);
+  color: #8A94A0;
 }
 
 .history-item-unit {
   font-size: 12px;
-  color: var(--text-muted);
+  color: #8A94A0;
   margin-left: 2px;
   font-family: 'Poppins', 'Inter', sans-serif;
 }
@@ -1293,7 +1294,7 @@
 
 .btn-view-all {
   font-size: 14px;
-  color: var(--primary);
+  color: #115761;
   font-weight: 500;
   font-family: 'Poppins', 'Inter', sans-serif;
   background: transparent;
@@ -1304,7 +1305,7 @@
 }
 
 .btn-view-all:hover {
-  color: var(--primary-light);
+  color: #E08E5B;
   transform: translateX(4px);
 }
 
@@ -1432,17 +1433,17 @@
 .medication-stat-info .stat-med-name {
   font-size: 15px;
   font-weight: 600;
-  color: var(--text-primary);
+  color: #1A1A1A;
 }
 
 .medication-stat-info .stat-med-dose {
   font-size: 13px;
-  color: var(--text-secondary);
+  color: #5A6570;
 }
 
 .medication-stat-info .stat-med-time {
   font-size: 12px;
-  color: var(--text-muted);
+  color: #8A94A0;
 }
 
 .medication-stat-empty {
@@ -1454,7 +1455,7 @@
 }
 
 .medication-stat-empty .stat-med-time {
-  color: var(--text-muted);
+  color: #8A94A0;
   font-size: 14px;
 }
 
@@ -1462,8 +1463,8 @@
 .taken-medications-card {
   padding: 16px 20px;
   margin-bottom: 16px;
-  background: var(--surface);
-  border-radius: var(--radius);
+  background: #FFFFFF;
+  border-radius: 12px;
   border: 1px solid rgba(27, 79, 114, 0.06);
 }
 
@@ -1480,7 +1481,7 @@
   gap: 8px;
   font-size: 16px;
   font-weight: 600;
-  color: var(--text-primary);
+  color: #1A1A1A;
   font-family: 'Poppins', 'Inter', sans-serif;
 }
 
@@ -1492,12 +1493,12 @@
 .taken-icon svg {
   width: 18px;
   height: 18px;
-  stroke: var(--success);
+  stroke: #3A7D5C;
 }
 
 .taken-count {
   font-size: 13px;
-  color: var(--text-muted);
+  color: #8A94A0;
   font-family: 'Poppins', 'Inter', sans-serif;
 }
 
@@ -1514,7 +1515,7 @@
   padding: 8px 12px;
   background: rgba(58, 125, 92, 0.04);
   border-radius: 8px;
-  border-left: 3px solid var(--success);
+  border-left: 3px solid #3A7D5C;
 }
 
 .taken-medication-info {
@@ -1526,13 +1527,13 @@
 .taken-medication-name {
   font-size: 14px;
   font-weight: 500;
-  color: var(--text-primary);
+  color: #1A1A1A;
   font-family: 'Poppins', 'Inter', sans-serif;
 }
 
 .taken-medication-dose {
   font-size: 13px;
-  color: var(--text-secondary);
+  color: #5A6570;
   font-family: 'Poppins', 'Inter', sans-serif;
 }
 
@@ -1541,19 +1542,19 @@
   align-items: center;
   gap: 4px;
   font-size: 12px;
-  color: var(--text-muted);
+  color: #8A94A0;
   font-family: 'Poppins', 'Inter', sans-serif;
 }
 
 .taken-medication-time svg {
   width: 14px;
   height: 14px;
-  stroke: var(--text-muted);
+  stroke: #8A94A0;
 }
 
 .taken-medication-date {
   font-size: 12px;
-  color: var(--text-muted);
+  color: #8A94A0;
   font-family: 'Poppins', 'Inter', sans-serif;
 }
 
@@ -1573,7 +1574,7 @@
   gap: 10px;
   cursor: pointer;
   font-size: 14px;
-  color: var(--text-primary);
+  color: #1A1A1A;
   font-family: 'Poppins', 'Inter', sans-serif;
 }
 
