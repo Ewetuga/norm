@@ -10,6 +10,7 @@ import Profile from './pages/dashboard/Profile';
 import Records from './pages/dashboard/Records';
 import AI from './pages/ai/AI';
 import Learn from './pages/dashboard/Learn';
+import NotificationPermission from './components/NotificationPermission';
 import './styles/design-system.css';
 
 // Placeholder pages
@@ -23,6 +24,7 @@ const Medication = () => (
 function App() {
   return (
     <BrowserRouter>
+      <NotificationPermission />
       <Routes>
         {/* Auth routes (no layout) */}
         <Route path="/" element={<Welcome />} />

@@ -1747,3 +1747,196 @@
     stroke: #E08E5B;
   }
 }
+
+/* ---------- REMINDER SUCCESS ---------- */
+.reminder-success {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: #e8f5e9;
+  border-radius: 10px;
+  border-left: 4px solid #3A7D5C;
+  margin-bottom: 16px;
+  animation: slideIn 0.3s ease-out;
+  color: #2d6a4f;
+  font-size: 14px;
+  font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+.reminder-success svg {
+  width: 20px;
+  height: 20px;
+  stroke: #3A7D5C;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- REMINDER BADGE ---------- */
+.reminder-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #E08E5B;
+  background: rgba(224, 142, 91, 0.08);
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-top: 2px;
+  font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+.reminder-badge svg {
+  width: 12px;
+  height: 12px;
+  stroke: #E08E5B;
+}
+
+/* ---------- CHECKBOX WITH CALENDAR ICON ---------- */
+.checkbox-label .checkbox-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.checkbox-label .checkbox-text svg {
+  width: 16px;
+  height: 16px;
+  stroke: #5A6570;
+}
+
+@media (prefers-color-scheme: dark) {
+  .reminder-success {
+    background: rgba(58, 125, 92, 0.15);
+    color: #68D391;
+  }
+
+  .reminder-success svg {
+    stroke: #68D391;
+  }
+
+  .reminder-badge {
+    background: rgba(224, 142, 91, 0.12);
+    color: #E08E5B;
+  }
+
+  .reminder-badge svg {
+    stroke: #E08E5B;
+  }
+
+  .checkbox-label .checkbox-text svg {
+    stroke: #8A94A0;
+  }
+}
+
+/* ---------- REMINDER SUCCESS ---------- */
+.reminder-success {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: #e8f5e9;
+  border-radius: 10px;
+  border-left: 4px solid #3A7D5C;
+  margin-bottom: 16px;
+  animation: slideIn 0.3s ease-out;
+  color: #2d6a4f;
+  font-size: 14px;
+  font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+.reminder-success svg {
+  width: 20px;
+  height: 20px;
+  stroke: #3A7D5C;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- REMINDER BADGE ---------- */
+.reminder-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #E08E5B;
+  background: rgba(224, 142, 91, 0.08);
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-top: 2px;
+  font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+.reminder-badge svg {
+  width: 12px;
+  height: 12px;
+  stroke: #E08E5B;
+}
+
+/* ---------- CHECKBOX WITH CALENDAR ICON ---------- */
+.checkbox-label .checkbox-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.checkbox-label .checkbox-text svg {
+  width: 16px;
+  height: 16px;
+  stroke: #5A6570;
+}
+
+.checkbox-hint {
+  font-size: 12px;
+  color: #8A94A0;
+  margin-top: 4px;
+  padding-left: 28px;
+  font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+/* ---------- DARK MODE ---------- */
+@media (prefers-color-scheme: dark) {
+  .reminder-success {
+    background: rgba(58, 125, 92, 0.15);
+    color: #68D391;
+  }
+
+  .reminder-success svg {
+    stroke: #68D391;
+  }
+
+  .reminder-badge {
+    background: rgba(224, 142, 91, 0.12);
+    color: #E08E5B;
+  }
+
+  .reminder-badge svg {
+    stroke: #E08E5B;
+  }
+
+  .checkbox-label .checkbox-text svg {
+    stroke: #8A94A0;
+  }
+
+  .checkbox-hint {
+    color: #8A94A0;
+  }
+}

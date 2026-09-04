@@ -1,0 +1,109 @@
+.notification-banner {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 480px;
+  width: 90%;
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(27, 79, 114, 0.06);
+  padding: 16px 20px;
+  z-index: 999;
+  animation: slideUpBanner 0.4s ease-out;
+}
+
+@keyframes slideUpBanner {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.notification-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.notification-banner-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.notification-banner-text {
+  flex: 1;
+  min-width: 140px;
+}
+
+.notification-banner-text h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1A1A1A;
+  margin: 0;
+  font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+.notification-banner-text p {
+  font-size: 12px;
+  color: #5A6570;
+  margin: 0;
+  font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+.notification-banner .btn {
+  padding: 8px 16px;
+  font-size: 13px;
+  min-height: 36px;
+  font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+@media (max-width: 480px) {
+  .notification-banner {
+    bottom: 76px;
+    padding: 14px 16px;
+  }
+
+  .notification-banner-content {
+    gap: 10px;
+  }
+
+  .notification-banner-icon {
+    font-size: 24px;
+  }
+
+  .notification-banner-text h4 {
+    font-size: 13px;
+  }
+
+  .notification-banner-text p {
+    font-size: 11px;
+  }
+
+  .notification-banner .btn {
+    font-size: 12px;
+    padding: 6px 12px;
+    min-height: 32px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .notification-banner {
+    background: #1e1e36;
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .notification-banner-text h4 {
+    color: #F0F0F0;
+  }
+
+  .notification-banner-text p {
+    color: #8A94A0;
+  }
+}
