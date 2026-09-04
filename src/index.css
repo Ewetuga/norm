@@ -61,35 +61,35 @@
 }
 
 /* ========================================
-   DARK MODE - NORM BRAND COLORS
+   DARK MODE - INK TEAL DOMINANT
    ======================================== */
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Brand Colors - Dark Mode */
-    --primary: #E08E5B;
-    --primary-dark: #d47a4a;
-    --primary-light: #f0a87a;
+    /* Brand Colors - Dark Mode (Ink Teal Dominant) */
+    --primary: #1a7a8a;
+    --primary-dark: #115761;
+    --primary-light: #2a9aaa;
     --clay: #E08E5B;
     --clay-dark: #d47a4a;
     --clay-light: #f0a87a;
-    --warm-white: #12121e;
-    --surface: #1e1e36;
+    --warm-white: #0d1f24;
+    --surface: #163036;
     
     /* Text Colors - Dark Mode */
-    --text: #C8C8D4;
-    --text-h: #F0F0F0;
-    --text-secondary: #C8C8D4;
-    --text-muted: #8A94A0;
+    --text: #B8D4D8;
+    --text-h: #E8F4F6;
+    --text-secondary: #A0C4C8;
+    --text-muted: #6A8E92;
     
-    /* UI Colors - Dark Mode */
-    --border: rgba(255, 255, 255, 0.06);
-    --code-bg: #1f2028;
+    /* UI Colors - Dark Mode (Ink Teal Accents) */
+    --border: rgba(17, 87, 97, 0.4);
+    --code-bg: #0d262b;
     --accent: #E08E5B;
-    --accent-bg: rgba(224, 142, 91, 0.15);
-    --accent-border: rgba(224, 142, 91, 0.5);
-    --social-bg: rgba(30, 30, 54, 0.5);
-    --shadow: rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+    --accent-bg: rgba(224, 142, 91, 0.12);
+    --accent-border: rgba(224, 142, 91, 0.4);
+    --social-bg: rgba(17, 87, 97, 0.15);
+    --shadow: rgba(0, 0, 0, 0.5) 0 10px 15px -3px, rgba(0, 0, 0, 0.3) 0 4px 6px -2px;
     
     /* Status Colors - Dark Mode */
     --success: #68D391;
