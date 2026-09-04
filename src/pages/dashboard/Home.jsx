@@ -125,8 +125,43 @@ const CalendarIcon = () => (
   </svg>
 );
 
+// Google Calendar Icon
+const GoogleIcon = () => (
+  <svg viewBox="0 0 24 24" width="24" height="24">
+    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+  </svg>
+);
+
+// Apple Calendar Icon
+const AppleIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="1.5">
+    <rect x="3" y="4" width="18" height="18" rx="2"/>
+    <line x1="16" y1="2" x2="16" y2="6"/>
+    <line x1="8" y1="2" x2="8" y2="6"/>
+    <line x1="3" y1="10" x2="21" y2="10"/>
+    <circle cx="12" cy="14" r="1"/>
+    <circle cx="8" cy="14" r="1"/>
+    <circle cx="16" cy="14" r="1"/>
+  </svg>
+);
+
+// Outlook Icon
+const OutlookIcon = () => (
+  <svg viewBox="0 0 24 24" fill="#0078D4">
+    <rect x="2" y="4" width="20" height="18" rx="2"/>
+    <path d="M8 2v4"/>
+    <path d="M16 2v4"/>
+    <path d="M2 10h20"/>
+    <path d="M10 14h4"/>
+    <path d="M10 18h4"/>
+  </svg>
+);
+
 const Home = () => {
-  // Generate 10 sample readings
+  // Generate sample readings
   const generateSampleReadings = () => {
     const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     const statuses = ['Routine', 'Monitor', 'Recheck advised', 'Routine', 'Monitor', 'Routine', 'Routine', 'Recheck advised', 'Monitor', 'Routine'];
@@ -148,7 +183,7 @@ const Home = () => {
     });
   };
 
-  // State for BP readings
+  // State
   const [readings, setReadings] = useState(generateSampleReadings());
   const [showForm, setShowForm] = useState(false);
   const [showMedicationForm, setShowMedicationForm] = useState(false);
@@ -164,7 +199,6 @@ const Home = () => {
     notes: ''
   });
 
-  // Medication State
   const [medicationFormData, setMedicationFormData] = useState({
     name: '',
     dose: '',
@@ -195,79 +229,14 @@ const Home = () => {
     return 'Good evening';
   };
 
-  // Request notification permission on mount
   useEffect(() => {
     if ('Notification' in window && Notification.permission === 'default') {
       Notification.requestPermission();
     }
   }, []);
 
-  // Get latest reading (first in the list)
-  const latestBP = readings.length > 0 ? readings[0] : { 
-    systolic: 0, 
-    diastolic: 0, 
-    pulse: 0, 
-    date: '--', 
-    time: '--', 
-    status: 'No readings', 
-    statusLevel: 'normal' 
-  };
-
-  // Calculate average from first 7 readings
-  const avgReadings = readings.slice(0, 7);
-  const avgBP = avgReadings.length > 0 ? {
-    systolic: Math.round(avgReadings.reduce((sum, r) => sum + r.systolic, 0) / avgReadings.length),
-    diastolic: Math.round(avgReadings.reduce((sum, r) => sum + r.diastolic, 0) / avgReadings.length),
-    readings: avgReadings.length
-  } : { systolic: 0, diastolic: 0, readings: 0 };
-
-  // Get only the latest 3 readings for history
-  const historyReadings = readings.slice(0, 3);
-
-  // Get today's medications (not taken yet)
-  const todaysMedications = medications.filter(m => !m.taken);
-
-  // Handle form input changes
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  // Handle medication form changes
-  const handleMedicationChange = (e) => {
-    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-    setMedicationFormData({ ...medicationFormData, [e.target.name]: value });
-  };
-
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    const newReading = {
-      id: readings.length + 1,
-      systolic: parseInt(formData.systolic),
-      diastolic: parseInt(formData.diastolic),
-      pulse: parseInt(formData.pulse) || 0,
-      date: new Date().toLocaleDateString('en-US', { weekday: 'short' }),
-      time: formData.time,
-      status: getStatus(parseInt(formData.systolic), parseInt(formData.diastolic)),
-      statusLevel: getStatusLevel(parseInt(formData.systolic), parseInt(formData.diastolic))
-    };
-
-    setReadings([newReading, ...readings]);
-    setShowForm(false);
-    setFormData({
-      systolic: '',
-      diastolic: '',
-      pulse: '',
-      date: new Date().toISOString().split('T')[0],
-      time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
-      context: 'Morning',
-      notes: ''
-    });
-  };
-
   // ========================================
-  // CALENDAR INTEGRATION FUNCTIONS
+  // CALENDAR INTEGRATION - DIRECT REDIRECTS
   // ========================================
 
   // 1. Add to Google Calendar
@@ -298,7 +267,7 @@ const Home = () => {
     window.open(url, '_blank');
   };
 
-  // 2. Add to Apple Calendar (.ics file)
+  // 2. Add to Apple Calendar
   const addToAppleCalendar = (name, dose, time, frequency) => {
     const now = new Date();
     const [hours, minutes] = time.split(':');
@@ -316,6 +285,7 @@ const Home = () => {
       return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
     };
     
+    // Create .ics content
     const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//NORM//Medication Reminder//EN
@@ -334,22 +304,14 @@ TRIGGER:-PT10M
 ACTION:DISPLAY
 DESCRIPTION:Reminder: Time to take your medication
 END:VALARM
-BEGIN:VALARM
-TRIGGER:-PT5M
-ACTION:DISPLAY
-DESCRIPTION:Reminder: Time to take your medication (5 min)
-END:VALARM
 END:VEVENT
 END:VCALENDAR`;
     
-    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = `NORM_Medication_${name.replace(/\s/g, '_')}.ics`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(link.href);
+    // Use data URI to open in Calendar app
+    const encoded = encodeURIComponent(icsContent);
+    const url = `data:text/calendar;charset=utf-8,${encoded}`;
+    
+    window.open(url, '_blank');
   };
 
   // 3. Add to Outlook Calendar
@@ -408,7 +370,74 @@ END:VCALENDAR`;
     window.open(url, '_blank');
   };
 
-  // Handle medication form submission
+  // Show success message
+  const showSuccessMessage = (name) => {
+    setSavedMessage(`✅ Reminder added to calendar for ${name}`);
+    setShowReminderSuccess(true);
+    setTimeout(() => {
+      setShowReminderSuccess(false);
+      setSavedMessage('');
+    }, 4000);
+  };
+
+  // Get latest reading
+  const latestBP = readings.length > 0 ? readings[0] : { 
+    systolic: 0, 
+    diastolic: 0, 
+    pulse: 0, 
+    date: '--', 
+    time: '--', 
+    status: 'No readings', 
+    statusLevel: 'normal' 
+  };
+
+  // Calculate average
+  const avgReadings = readings.slice(0, 7);
+  const avgBP = avgReadings.length > 0 ? {
+    systolic: Math.round(avgReadings.reduce((sum, r) => sum + r.systolic, 0) / avgReadings.length),
+    diastolic: Math.round(avgReadings.reduce((sum, r) => sum + r.diastolic, 0) / avgReadings.length),
+    readings: avgReadings.length
+  } : { systolic: 0, diastolic: 0, readings: 0 };
+
+  const historyReadings = readings.slice(0, 3);
+  const todaysMedications = medications.filter(m => !m.taken);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleMedicationChange = (e) => {
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    setMedicationFormData({ ...medicationFormData, [e.target.name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    const newReading = {
+      id: readings.length + 1,
+      systolic: parseInt(formData.systolic),
+      diastolic: parseInt(formData.diastolic),
+      pulse: parseInt(formData.pulse) || 0,
+      date: new Date().toLocaleDateString('en-US', { weekday: 'short' }),
+      time: formData.time,
+      status: getStatus(parseInt(formData.systolic), parseInt(formData.diastolic)),
+      statusLevel: getStatusLevel(parseInt(formData.systolic), parseInt(formData.diastolic))
+    };
+
+    setReadings([newReading, ...readings]);
+    setShowForm(false);
+    setFormData({
+      systolic: '',
+      diastolic: '',
+      pulse: '',
+      date: new Date().toISOString().split('T')[0],
+      time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+      context: 'Morning',
+      notes: ''
+    });
+  };
+
   const handleMedicationSubmit = (e) => {
     e.preventDefault();
     
@@ -426,7 +455,6 @@ END:VCALENDAR`;
     setMedications([...medications, newMedication]);
     setShowMedicationForm(false);
 
-    // If reminder is enabled, show calendar options
     if (medicationFormData.reminder) {
       setPendingMedication(newMedication);
       setShowCalendarOptions(true);
@@ -441,7 +469,6 @@ END:VCALENDAR`;
     }
   };
 
-  // Handle calendar selection
   const handleCalendarSelect = (type) => {
     if (!pendingMedication) return;
     
@@ -474,15 +501,9 @@ END:VCALENDAR`;
       reminder: false
     });
     
-    setSavedMessage(`✅ Reminder set for ${name} at ${time}`);
-    setShowReminderSuccess(true);
-    setTimeout(() => {
-      setShowReminderSuccess(false);
-      setSavedMessage('');
-    }, 4000);
+    showSuccessMessage(name);
   };
 
-  // Handle marking medication as taken
   const handleMarkAsTaken = (id) => {
     const now = new Date();
     const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
@@ -505,7 +526,6 @@ END:VCALENDAR`;
     }
   };
 
-  // Get status based on BP values
   const getStatus = (sys, dia) => {
     if (sys >= 180 || dia >= 120) return 'Urgent Medical Review';
     if (sys >= 160 || dia >= 100) return 'Recheck advised';
@@ -520,7 +540,6 @@ END:VCALENDAR`;
     return 'normal';
   };
 
-  // Get badge class for status
   const getBadgeClass = (level) => {
     switch(level) {
       case 'urgent': return 'badge-urgent';
@@ -529,7 +548,6 @@ END:VCALENDAR`;
     }
   };
 
-  // Get status dot color
   const getStatusDot = (level) => {
     switch(level) {
       case 'urgent': return '#C0392B';
@@ -659,6 +677,7 @@ END:VCALENDAR`;
           </div>
           <div className="chart-area">
             <svg className="chart-svg" viewBox="0 0 500 200" preserveAspectRatio="none">
+              {/* Chart lines - same as before */}
               <line x1="0" y1="30" x2="500" y2="30" stroke="#E8ECF0" strokeWidth="1" strokeDasharray="4,4" />
               <line x1="0" y1="60" x2="500" y2="60" stroke="#E8ECF0" strokeWidth="1" strokeDasharray="4,4" />
               <line x1="0" y1="90" x2="500" y2="90" stroke="#E8ECF0" strokeWidth="1" strokeDasharray="4,4" />
@@ -747,7 +766,7 @@ END:VCALENDAR`;
         </div>
       </div>
 
-      {/* BP History - Only Latest 3 Readings */}
+      {/* BP History */}
       <div className="card history-card">
         <div className="history-header">
           <h3>
@@ -1115,56 +1134,104 @@ END:VCALENDAR`;
             <div className="calendar-options-grid">
               <button 
                 className="calendar-option google"
-                onClick={() => handleCalendarSelect('google')}
+                onClick={() => {
+                  addToGoogleCalendar(
+                    pendingMedication.name, 
+                    pendingMedication.dose, 
+                    pendingMedication.time, 
+                    pendingMedication.frequency
+                  );
+                  setShowCalendarOptions(false);
+                  setPendingMedication(null);
+                  setMedicationFormData({
+                    name: '',
+                    dose: '',
+                    time: '08:00',
+                    frequency: 'Once daily',
+                    reminder: false
+                  });
+                  showSuccessMessage(pendingMedication.name);
+                }}
               >
-                <svg viewBox="0 0 24 24" fill="#4285F4">
-                  <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/>
-                  <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                  <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-                  <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-                </svg>
+                <GoogleIcon />
                 <span>Google Calendar</span>
-                <small>Opens in new tab</small>
+                <small>Opens in browser</small>
               </button>
               
               <button 
                 className="calendar-option apple"
-                onClick={() => handleCalendarSelect('apple')}
+                onClick={() => {
+                  addToAppleCalendar(
+                    pendingMedication.name, 
+                    pendingMedication.dose, 
+                    pendingMedication.time, 
+                    pendingMedication.frequency
+                  );
+                  setShowCalendarOptions(false);
+                  setPendingMedication(null);
+                  setMedicationFormData({
+                    name: '',
+                    dose: '',
+                    time: '08:00',
+                    frequency: 'Once daily',
+                    reminder: false
+                  });
+                  showSuccessMessage(pendingMedication.name);
+                }}
               >
-                <svg viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="1.5">
-                  <rect x="3" y="4" width="18" height="18" rx="2"/>
-                  <line x1="16" y1="2" x2="16" y2="6"/>
-                  <line x1="8" y1="2" x2="8" y2="6"/>
-                  <line x1="3" y1="10" x2="21" y2="10"/>
-                  <circle cx="12" cy="14" r="1"/>
-                  <circle cx="8" cy="14" r="1"/>
-                  <circle cx="16" cy="14" r="1"/>
-                </svg>
+                <AppleIcon />
                 <span>Apple Calendar</span>
-                <small>Downloads .ics file</small>
+                <small>Opens in Calendar app</small>
               </button>
               
               <button 
                 className="calendar-option outlook"
-                onClick={() => handleCalendarSelect('outlook')}
+                onClick={() => {
+                  addToOutlookCalendar(
+                    pendingMedication.name, 
+                    pendingMedication.dose, 
+                    pendingMedication.time, 
+                    pendingMedication.frequency
+                  );
+                  setShowCalendarOptions(false);
+                  setPendingMedication(null);
+                  setMedicationFormData({
+                    name: '',
+                    dose: '',
+                    time: '08:00',
+                    frequency: 'Once daily',
+                    reminder: false
+                  });
+                  showSuccessMessage(pendingMedication.name);
+                }}
               >
-                <svg viewBox="0 0 24 24" fill="#0078D4">
-                  <rect x="2" y="4" width="20" height="18" rx="2"/>
-                  <path d="M8 2v4"/>
-                  <path d="M16 2v4"/>
-                  <path d="M2 10h20"/>
-                  <path d="M10 14h4"/>
-                  <path d="M10 18h4"/>
-                </svg>
+                <OutlookIcon />
                 <span>Outlook Calendar</span>
-                <small>Opens in new tab</small>
+                <small>Opens in browser</small>
               </button>
               
               <button 
                 className="calendar-option yahoo"
-                onClick={() => handleCalendarSelect('yahoo')}
+                onClick={() => {
+                  addToYahooCalendar(
+                    pendingMedication.name, 
+                    pendingMedication.dose, 
+                    pendingMedication.time, 
+                    pendingMedication.frequency
+                  );
+                  setShowCalendarOptions(false);
+                  setPendingMedication(null);
+                  setMedicationFormData({
+                    name: '',
+                    dose: '',
+                    time: '08:00',
+                    frequency: 'Once daily',
+                    reminder: false
+                  });
+                  showSuccessMessage(pendingMedication.name);
+                }}
               >
-                <svg viewBox="0 0 24 24" fill="#6001D2">
+                <svg viewBox="0 0 24 24" fill="#312245">
                   <rect x="3" y="4" width="18" height="18" rx="2"/>
                   <line x1="16" y1="2" x2="16" y2="6"/>
                   <line x1="8" y1="2" x2="8" y2="6"/>
@@ -1174,7 +1241,7 @@ END:VCALENDAR`;
                   <circle cx="16" cy="15" r="1"/>
                 </svg>
                 <span>Yahoo Calendar</span>
-                <small>Opens in new tab</small>
+                <small>Opens in browser</small>
               </button>
             </div>
             
