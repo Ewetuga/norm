@@ -25,24 +25,16 @@ const ArrowLeftIcon = () => (
   </svg>
 );
 
-const CalendarIcon = () => (
+const CloseIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-    <line x1="16" y1="2" x2="16" y2="6"/>
-    <line x1="8" y1="2" x2="8" y2="6"/>
-    <line x1="3" y1="10" x2="21" y2="10"/>
-  </svg>
-);
-
-const FilterIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polygon points="22 3 2 3 10 13 10 21 14 18 14 13 22 3"/>
+    <line x1="18" y1="6" x2="6" y2="18"/>
+    <line x1="6" y1="6" x2="18" y2="18"/>
   </svg>
 );
 
 const Monitor = () => {
-  // Sample readings data (would come from props/context in real app)
-  const [readings] = useState([
+  // Sample readings data
+  const [readings, setReadings] = useState([
     { id: 1, systolic: 150, diastolic: 80, pulse: 65, date: 'Fri', time: '10:38 AM', status: 'Recheck advised', statusLevel: 'caution' },
     { id: 2, systolic: 132, diastolic: 84, pulse: 72, date: 'Thu', time: '08:15 AM', status: 'Monitor', statusLevel: 'normal' },
     { id: 3, systolic: 128, diastolic: 82, pulse: 68, date: 'Wed', time: '07:45 AM', status: 'Routine', statusLevel: 'normal' },
@@ -57,6 +49,16 @@ const Monitor = () => {
 
   const [filter, setFilter] = useState('all');
   const [selectedReading, setSelectedReading] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({
+    systolic: '',
+    diastolic: '',
+    pulse: '',
+    date: new Date().toISOString().split('T')[0],
+    time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+    context: 'Morning',
+    notes: ''
+  });
 
   // Get status dot color
   const getStatusDot = (level) => {
@@ -74,6 +76,54 @@ const Monitor = () => {
       case 'caution': return 'badge-caution';
       default: return 'badge-normal';
     }
+  };
+
+  // Get status based on BP values
+  const getStatus = (sys, dia) => {
+    if (sys >= 180 || dia >= 120) return 'Urgent Medical Review';
+    if (sys >= 160 || dia >= 100) return 'Recheck advised';
+    if (sys >= 140 || dia >= 90) return 'Monitor';
+    return 'Routine';
+  };
+
+  const getStatusLevel = (sys, dia) => {
+    if (sys >= 180 || dia >= 120) return 'urgent';
+    if (sys >= 160 || dia >= 100) return 'caution';
+    if (sys >= 140 || dia >= 90) return 'caution';
+    return 'normal';
+  };
+
+  // Handle form input changes
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    const newReading = {
+      id: readings.length + 1,
+      systolic: parseInt(formData.systolic),
+      diastolic: parseInt(formData.diastolic),
+      pulse: parseInt(formData.pulse) || 0,
+      date: new Date().toLocaleDateString('en-US', { weekday: 'short' }),
+      time: formData.time,
+      status: getStatus(parseInt(formData.systolic), parseInt(formData.diastolic)),
+      statusLevel: getStatusLevel(parseInt(formData.systolic), parseInt(formData.diastolic))
+    };
+
+    setReadings([newReading, ...readings]);
+    setShowForm(false);
+    setFormData({
+      systolic: '',
+      diastolic: '',
+      pulse: '',
+      date: new Date().toISOString().split('T')[0],
+      time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+      context: 'Morning',
+      notes: ''
+    });
   };
 
   // Filter readings
@@ -222,11 +272,142 @@ const Monitor = () => {
 
       {/* Log BP Button */}
       <div className="monitor-cta">
-        <Link to="/app/monitor/log" className="btn btn-primary btn-block">
+        <button onClick={() => setShowForm(true)} className="btn btn-primary btn-block">
           <ChartIcon />
           Log New Reading
-        </Link>
+        </button>
       </div>
+
+      {/* Log BP Modal */}
+      {showForm && (
+        <div className="modal-overlay" onClick={() => setShowForm(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>Log Blood Pressure</h2>
+              <button className="modal-close" onClick={() => setShowForm(false)}>
+                <CloseIcon />
+              </button>
+            </div>
+            
+            <form onSubmit={handleSubmit} className="bp-form">
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="systolic">Systolic (mmHg)</label>
+                  <input
+                    type="number"
+                    id="systolic"
+                    name="systolic"
+                    className="form-control"
+                    placeholder="e.g., 120"
+                    value={formData.systolic}
+                    onChange={handleChange}
+                    required
+                    min="80"
+                    max="250"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="diastolic">Diastolic (mmHg)</label>
+                  <input
+                    type="number"
+                    id="diastolic"
+                    name="diastolic"
+                    className="form-control"
+                    placeholder="e.g., 80"
+                    value={formData.diastolic}
+                    onChange={handleChange}
+                    required
+                    min="40"
+                    max="150"
+                  />
+                </div>
+              </div>
+
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="pulse">Pulse (bpm)</label>
+                  <input
+                    type="number"
+                    id="pulse"
+                    name="pulse"
+                    className="form-control"
+                    placeholder="e.g., 72"
+                    value={formData.pulse}
+                    onChange={handleChange}
+                    min="40"
+                    max="200"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="context">Context</label>
+                  <select
+                    id="context"
+                    name="context"
+                    className="form-control"
+                    value={formData.context}
+                    onChange={handleChange}
+                  >
+                    <option value="Morning">Morning</option>
+                    <option value="Afternoon">Afternoon</option>
+                    <option value="Evening">Evening</option>
+                    <option value="Before medication">Before medication</option>
+                    <option value="After medication">After medication</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="time">Time</label>
+                  <input
+                    type="time"
+                    id="time"
+                    name="time"
+                    className="form-control"
+                    value={formData.time}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="date">Date</label>
+                  <input
+                    type="date"
+                    id="date"
+                    name="date"
+                    className="form-control"
+                    value={formData.date}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="notes">Notes (optional)</label>
+                <textarea
+                  id="notes"
+                  name="notes"
+                  className="form-control"
+                  placeholder="Any additional notes..."
+                  value={formData.notes}
+                  onChange={handleChange}
+                  rows="2"
+                />
+              </div>
+
+              <div className="form-actions">
+                <button type="button" className="btn btn-outline" onClick={() => setShowForm(false)}>
+                  Cancel
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  Save Reading
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
