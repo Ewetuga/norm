@@ -13,6 +13,12 @@
 /* Ensure colors are rendered consistently across devices */
 :root {
   color-scheme: light dark;
+  -webkit-color-scheme: light dark;
+}
+
+html {
+  color-scheme: light dark;
+  -webkit-color-scheme: light dark;
 }
 
 body {
@@ -23,13 +29,14 @@ body {
   padding: 0;
   line-height: 1.6;
   min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Dark Mode */
+/* ---------- DARK MODE - INK TEAL DOMINANT ---------- */
 @media (prefers-color-scheme: dark) {
   body {
-    background: #1a1a2e;
-    color: #E2E8F0;
+    background: #0d1f24;
+    color: #E8F4F6;
   }
 }
 
@@ -43,7 +50,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (prefers-color-scheme: dark) {
   h1, h2, h3, h4, h5, h6 {
-    color: #E2E8F0;
+    color: #E8F4F6;
   }
 }
 
@@ -59,7 +66,7 @@ p {
 
 @media (prefers-color-scheme: dark) {
   p {
-    color: #A0AEC0;
+    color: #B8D4D8;
   }
 }
 
@@ -84,33 +91,33 @@ p {
 }
 
 .btn-primary {
-  background: #1B4F72;
+  background: #115761;
   color: #F7F7F4;
 }
 
 .btn-primary:hover {
-  background: #0e3a54;
-  box-shadow: 0 4px 20px rgba(27, 79, 114, 0.12);
+  background: #0d4550;
+  box-shadow: 0 4px 20px rgba(17, 87, 97, 0.12);
   transform: translateY(-1px);
 }
 
 .btn-secondary {
-  background: #2E86AB;
+  background: #1a7a8a;
   color: #F7F7F4;
 }
 
 .btn-secondary:hover {
-  background: #257a96;
+  background: #115761;
 }
 
 .btn-outline {
   background: transparent;
-  color: #1B4F72;
-  border: 2px solid #1B4F72;
+  color: #115761;
+  border: 2px solid #115761;
 }
 
 .btn-outline:hover {
-  background: #1B4F72;
+  background: #115761;
   color: #F7F7F4;
 }
 
@@ -149,31 +156,58 @@ p {
 /* Dark Mode Buttons */
 @media (prefers-color-scheme: dark) {
   .btn-primary {
-    background: #E08E5B;
-    color: #1a1a2e;
+    background: #1a7a8a;
+    color: #E8F4F6;
   }
 
   .btn-primary:hover {
-    background: #d47a4a;
-    box-shadow: 0 4px 20px rgba(224, 142, 91, 0.2);
+    background: #115761;
+    box-shadow: 0 4px 20px rgba(17, 87, 97, 0.3);
+  }
+
+  .btn-secondary {
+    background: #115761;
+    color: #E8F4F6;
+  }
+
+  .btn-secondary:hover {
+    background: #0d4550;
   }
 
   .btn-outline {
-    color: #E08E5B;
-    border-color: #E08E5B;
+    color: #1a7a8a;
+    border-color: #1a7a8a;
   }
 
   .btn-outline:hover {
-    background: #E08E5B;
-    color: #1a1a2e;
+    background: #1a7a8a;
+    color: #0d1f24;
   }
 
   .btn-ghost {
-    color: #A0AEC0;
+    color: #B8D4D8;
   }
 
   .btn-ghost:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(17, 87, 97, 0.15);
+  }
+
+  .btn-success {
+    background: #68D391;
+    color: #0d1f24;
+  }
+
+  .btn-success:hover {
+    background: #4ecb7a;
+  }
+
+  .btn-danger {
+    background: #fc8181;
+    color: #0d1f24;
+  }
+
+  .btn-danger:hover {
+    background: #fc6a6a;
   }
 }
 
@@ -182,24 +216,24 @@ p {
   background: #FFFFFF;
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 2px 12px rgba(27, 79, 114, 0.06);
+  box-shadow: 0 2px 12px rgba(17, 87, 97, 0.06);
   border: 1px solid #E8ECF0;
   transition: box-shadow 0.2s ease;
 }
 
 .card:hover {
-  box-shadow: 0 4px 20px rgba(27, 79, 114, 0.12);
+  box-shadow: 0 4px 20px rgba(17, 87, 97, 0.12);
 }
 
 @media (prefers-color-scheme: dark) {
   .card {
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(255, 255, 255, 0.05);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    background: #163036;
+    border-color: rgba(17, 87, 97, 0.4);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
   }
 
   .card:hover {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
   }
 }
 
@@ -218,7 +252,7 @@ p {
 
 @media (prefers-color-scheme: dark) {
   .form-group label {
-    color: #E2E8F0;
+    color: #E8F4F6;
   }
 }
 
@@ -237,8 +271,8 @@ p {
 
 .form-control:focus {
   outline: none;
-  border-color: #1B4F72;
-  box-shadow: 0 0 0 3px rgba(27, 79, 114, 0.08);
+  border-color: #115761;
+  box-shadow: 0 0 0 3px rgba(17, 87, 97, 0.08);
 }
 
 .form-control::placeholder {
@@ -270,18 +304,22 @@ select.form-control {
 
 @media (prefers-color-scheme: dark) {
   .form-control {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.08);
-    color: #E2E8F0;
+    background: rgba(17, 87, 97, 0.08);
+    border-color: rgba(17, 87, 97, 0.3);
+    color: #E8F4F6;
   }
 
   .form-control:focus {
-    border-color: #E08E5B;
-    box-shadow: 0 0 0 3px rgba(224, 142, 91, 0.1);
+    border-color: #1a7a8a;
+    box-shadow: 0 0 0 3px rgba(26, 122, 138, 0.15);
   }
 
   .form-control::placeholder {
-    color: #718096;
+    color: #6A8E92;
+  }
+
+  select.form-control {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236A8E92' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
   }
 }
 
@@ -327,7 +365,7 @@ select.form-control {
 
 @media (prefers-color-scheme: dark) {
   .text-muted {
-    color: #8A94A0;
+    color: #6A8E92;
   }
 }
 
@@ -357,7 +395,7 @@ select.form-control {
 
 .badge-primary {
   background: #e3edf5;
-  color: #1B4F72;
+  color: #115761;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -377,8 +415,8 @@ select.form-control {
   }
 
   .badge-primary {
-    background: rgba(27, 79, 114, 0.2);
-    color: #4A9BB8;
+    background: rgba(17, 87, 97, 0.25);
+    color: #1a7a8a;
   }
 }
 
@@ -391,7 +429,7 @@ hr.divider {
 
 @media (prefers-color-scheme: dark) {
   hr.divider {
-    border-color: rgba(255, 255, 255, 0.05);
+    border-color: rgba(17, 87, 97, 0.3);
   }
 }
 
@@ -403,7 +441,7 @@ hr.divider {
 
 @media (prefers-color-scheme: dark) {
   #root {
-    background: #1a1a2e;
+    background: #0d1f24;
   }
 }
 
@@ -417,7 +455,7 @@ hr.divider {
   justify-content: center;
   min-height: 50vh;
   padding: 20px;
-  background: rgba(247, 249, 252, 0.5);
+  background: rgba(247, 247, 244, 0.5);
   border-radius: 12px;
   position: relative;
   overflow: hidden;
@@ -425,7 +463,7 @@ hr.divider {
 
 @media (prefers-color-scheme: dark) {
   .placeholder-page {
-    background: rgba(26, 26, 46, 0.5);
+    background: rgba(13, 31, 36, 0.6);
   }
 }
 
@@ -439,20 +477,20 @@ hr.divider {
   -webkit-backdrop-filter: blur(10px);
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 0 4px 24px rgba(27, 79, 114, 0.06);
+  box-shadow: 0 4px 24px rgba(17, 87, 97, 0.06);
   position: relative;
   transition: all 0.4s ease;
 }
 
 .placeholder-content:hover {
-  box-shadow: 0 8px 40px rgba(27, 79, 114, 0.08);
+  box-shadow: 0 8px 40px rgba(17, 87, 97, 0.08);
   transform: translateY(-2px);
 }
 
 @media (prefers-color-scheme: dark) {
   .placeholder-content {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.05);
+    background: rgba(22, 48, 54, 0.7);
+    border-color: rgba(17, 87, 97, 0.2);
   }
 
   .placeholder-content:hover {
@@ -464,53 +502,53 @@ hr.divider {
   width: 72px;
   height: 72px;
   margin: 0 auto 16px;
-  background: rgba(27, 79, 114, 0.06);
+  background: rgba(17, 87, 97, 0.06);
   border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.4s ease;
-  border: 1px solid rgba(27, 79, 114, 0.06);
+  border: 1px solid rgba(17, 87, 97, 0.06);
 }
 
 .placeholder-content:hover .placeholder-icon-wrapper {
-  background: rgba(27, 79, 114, 0.1);
+  background: rgba(17, 87, 97, 0.1);
   transform: scale(1.04) rotate(-2deg);
 }
 
 @media (prefers-color-scheme: dark) {
   .placeholder-icon-wrapper {
-    background: rgba(46, 134, 171, 0.08);
-    border-color: rgba(255, 255, 255, 0.05);
+    background: rgba(26, 122, 138, 0.15);
+    border-color: rgba(17, 87, 97, 0.2);
   }
 
   .placeholder-content:hover .placeholder-icon-wrapper {
-    background: rgba(46, 134, 171, 0.15);
+    background: rgba(26, 122, 138, 0.25);
   }
 }
 
 .placeholder-icon {
   width: 32px;
   height: 32px;
-  color: #1B4F72;
-  stroke: #1B4F72;
+  color: #115761;
+  stroke: #115761;
   transition: all 0.4s ease;
 }
 
 .placeholder-content:hover .placeholder-icon {
-  color: #2E86AB;
-  stroke: #2E86AB;
+  color: #1a7a8a;
+  stroke: #1a7a8a;
 }
 
 @media (prefers-color-scheme: dark) {
   .placeholder-icon {
-    color: #4A9BB8;
-    stroke: #4A9BB8;
+    color: #1a7a8a;
+    stroke: #1a7a8a;
   }
 
   .placeholder-content:hover .placeholder-icon {
-    color: #4A9BB8;
-    stroke: #4A9BB8;
+    color: #2a9aaa;
+    stroke: #2a9aaa;
   }
 }
 
@@ -529,11 +567,11 @@ hr.divider {
 
 @media (prefers-color-scheme: dark) {
   .placeholder-content h2 {
-    color: #E2E8F0;
+    color: #E8F4F6;
   }
 
   .placeholder-content .text-muted {
-    color: #A0AEC0;
+    color: #B8D4D8;
   }
 }
 
@@ -544,7 +582,7 @@ hr.divider {
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(27, 79, 114, 0.04), transparent 70%);
+  background: radial-gradient(circle, rgba(17, 87, 97, 0.04), transparent 70%);
   pointer-events: none;
   animation: floatDecor 12s ease-in-out infinite;
 }
@@ -557,7 +595,7 @@ hr.divider {
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(46, 134, 171, 0.04), transparent 70%);
+  background: radial-gradient(circle, rgba(224, 142, 91, 0.04), transparent 70%);
   animation: floatDecor 16s ease-in-out infinite reverse;
 }
 
@@ -569,11 +607,11 @@ hr.divider {
 
 @media (prefers-color-scheme: dark) {
   .placeholder-decoration {
-    background: radial-gradient(circle, rgba(46, 134, 171, 0.06), transparent 70%);
+    background: radial-gradient(circle, rgba(26, 122, 138, 0.06), transparent 70%);
   }
 
   .placeholder-decoration::after {
-    background: radial-gradient(circle, rgba(27, 79, 114, 0.06), transparent 70%);
+    background: radial-gradient(circle, rgba(224, 142, 91, 0.04), transparent 70%);
   }
 }
 

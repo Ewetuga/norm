@@ -2,6 +2,18 @@
    NORM GLOBAL STYLES
    Brand: Ink Teal #115761 | Clay #E08E5B | Warm White #F7F7F4
    ======================================== */
+/* Force consistent colors on Chrome (all platforms) */
+html {
+  color-scheme: light dark;
+  -webkit-color-scheme: light dark;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 
 :root {
   color-scheme: light dark;
