@@ -1940,3 +1940,192 @@
     color: #8A94A0;
   }
 }
+
+/* ---------- REMINDER SUCCESS ---------- */
+.reminder-success {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: #e8f5e9;
+  border-radius: 10px;
+  border-left: 4px solid #3A7D5C;
+  margin-bottom: 16px;
+  animation: slideIn 0.3s ease-out;
+  color: #2d6a4f;
+  font-size: 14px;
+  font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+.reminder-success svg {
+  width: 20px;
+  height: 20px;
+  stroke: #3A7D5C;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- REMINDER BADGE ---------- */
+.reminder-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #E08E5B;
+  background: rgba(224, 142, 91, 0.08);
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-top: 2px;
+  font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+.reminder-badge svg {
+  width: 12px;
+  height: 12px;
+  stroke: #E08E5B;
+}
+
+/* ---------- CHECKBOX ---------- */
+.checkbox-label .checkbox-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.checkbox-label .checkbox-text svg {
+  width: 16px;
+  height: 16px;
+  stroke: #5A6570;
+}
+
+.checkbox-hint {
+  font-size: 12px;
+  color: #8A94A0;
+  margin-top: 4px;
+  padding-left: 28px;
+  font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+/* ---------- CALENDAR OPTIONS ---------- */
+.calendar-options {
+  max-width: 480px;
+}
+
+.calendar-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.calendar-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px;
+  background: #F7F7F4;
+  border: 2px solid rgba(27, 79, 114, 0.06);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+.calendar-option:hover {
+  border-color: #1B4F72;
+  background: rgba(27, 79, 114, 0.03);
+  transform: translateY(-2px);
+}
+
+.calendar-option svg {
+  width: 32px;
+  height: 32px;
+}
+
+.calendar-option span {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1A1A1A;
+}
+
+.calendar-option small {
+  font-size: 11px;
+  color: #5A6570;
+}
+
+.calendar-option.google:hover { border-color: #4285F4; }
+.calendar-option.apple:hover { border-color: #555; }
+.calendar-option.outlook:hover { border-color: #0078D4; }
+.calendar-option.yahoo:hover { border-color: #6001D2; }
+
+.calendar-options-note {
+  font-size: 13px;
+  color: #5A6570;
+  text-align: center;
+  padding: 12px;
+  background: rgba(27, 79, 114, 0.03);
+  border-radius: 8px;
+}
+
+/* ---------- DARK MODE ---------- */
+@media (prefers-color-scheme: dark) {
+  .reminder-success {
+    background: rgba(58, 125, 92, 0.15);
+    color: #68D391;
+  }
+
+  .reminder-success svg {
+    stroke: #68D391;
+  }
+
+  .reminder-badge {
+    background: rgba(224, 142, 91, 0.12);
+    color: #E08E5B;
+  }
+
+  .reminder-badge svg {
+    stroke: #E08E5B;
+  }
+
+  .checkbox-label .checkbox-text svg {
+    stroke: #8A94A0;
+  }
+
+  .checkbox-hint {
+    color: #8A94A0;
+  }
+
+  .calendar-option {
+    background: rgba(30, 28, 26, 0.4);
+    border-color: rgba(200, 180, 160, 0.08);
+  }
+
+  .calendar-option:hover {
+    border-color: #E08E5B;
+    background: rgba(224, 142, 91, 0.04);
+  }
+
+  .calendar-option span {
+    color: #F0E6D3;
+  }
+
+  .calendar-option small {
+    color: #8A94A0;
+  }
+
+  .calendar-options-note {
+    color: #8A94A0;
+    background: rgba(224, 142, 91, 0.04);
+  }
+}

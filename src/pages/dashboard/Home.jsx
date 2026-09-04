@@ -126,75 +126,6 @@ const CalendarIcon = () => (
 );
 
 const Home = () => {
-  // Request notification permission
-  const requestNotificationPermission = async () => {
-    if ('Notification' in window) {
-      const permission = await Notification.requestPermission();
-      return permission === 'granted';
-    }
-    return false;
-  };
-
-  // Send notification
-  const sendNotification = (medicationName, dose, time) => {
-    if ('Notification' in window && Notification.permission === 'granted') {
-      new Notification('💊 NORM Medication Reminder', {
-        body: `Time to take ${medicationName} (${dose}) at ${time}`,
-        icon: '/favicon.svg',
-        tag: 'medication-reminder',
-        requireInteraction: true,
-      });
-    }
-  };
-
-  // Create calendar event (download .ics file)
-  const createCalendarEvent = (medicationName, dose, time, frequency) => {
-    const now = new Date();
-    const [hours, minutes] = time.split(':');
-    const eventDate = new Date(now);
-    eventDate.setHours(parseInt(hours), parseInt(minutes), 0, 0);
-    
-    if (eventDate < now) {
-      eventDate.setDate(eventDate.getDate() + 1);
-    }
-    
-    const endDate = new Date(eventDate);
-    endDate.setMinutes(endDate.getMinutes() + 30);
-    
-    const formatDate = (date) => {
-      return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
-    };
-    
-    const icsContent = `BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//NORM//Medication Reminder//EN
-BEGIN:VEVENT
-UID:${Date.now()}-norm-medication
-DTSTAMP:${formatDate(now)}
-DTSTART:${formatDate(eventDate)}
-DTEND:${formatDate(endDate)}
-SUMMARY:💊 Take ${medicationName} (${dose})
-DESCRIPTION:Medication reminder for ${medicationName} - ${dose}\\nFrequency: ${frequency}
-CATEGORIES:HEALTH,MEDICATION
-STATUS:CONFIRMED
-BEGIN:VALARM
-TRIGGER:-PT10M
-ACTION:DISPLAY
-DESCRIPTION:Reminder: Time to take your medication
-END:VALARM
-END:VEVENT
-END:VCALENDAR`;
-    
-    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = `NORM_Medication_${medicationName.replace(/\s/g, '_')}.ics`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(link.href);
-  };
-
   // Generate 10 sample readings
   const generateSampleReadings = () => {
     const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -221,6 +152,8 @@ END:VCALENDAR`;
   const [readings, setReadings] = useState(generateSampleReadings());
   const [showForm, setShowForm] = useState(false);
   const [showMedicationForm, setShowMedicationForm] = useState(false);
+  const [showCalendarOptions, setShowCalendarOptions] = useState(false);
+  const [pendingMedication, setPendingMedication] = useState(null);
   const [formData, setFormData] = useState({
     systolic: '',
     diastolic: '',
@@ -262,27 +195,12 @@ END:VCALENDAR`;
     return 'Good evening';
   };
 
-  // Request permission on mount
+  // Request notification permission on mount
   useEffect(() => {
-    requestNotificationPermission();
+    if ('Notification' in window && Notification.permission === 'default') {
+      Notification.requestPermission();
+    }
   }, []);
-
-  // Check for medications due and send notifications
-  useEffect(() => {
-    const checkMedicationReminders = () => {
-      const now = new Date();
-      const currentTime = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
-      
-      medications.forEach(med => {
-        if (!med.taken && med.reminder && med.time === currentTime) {
-          sendNotification(med.name, med.dose, med.time);
-        }
-      });
-    };
-    
-    const interval = setInterval(checkMedicationReminders, 60000);
-    return () => clearInterval(interval);
-  }, [medications]);
 
   // Get latest reading (first in the list)
   const latestBP = readings.length > 0 ? readings[0] : { 
@@ -348,7 +266,149 @@ END:VCALENDAR`;
     });
   };
 
-  // Handle medication form submission with reminder
+  // ========================================
+  // CALENDAR INTEGRATION FUNCTIONS
+  // ========================================
+
+  // 1. Add to Google Calendar
+  const addToGoogleCalendar = (name, dose, time, frequency) => {
+    const now = new Date();
+    const [hours, minutes] = time.split(':');
+    const startDate = new Date(now);
+    startDate.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+    
+    if (startDate < now) {
+      startDate.setDate(startDate.getDate() + 1);
+    }
+    
+    const endDate = new Date(startDate);
+    endDate.setMinutes(endDate.getMinutes() + 30);
+    
+    const formatGoogleDate = (date) => {
+      return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+    };
+    
+    const title = encodeURIComponent(`💊 Take ${name} (${dose})`);
+    const details = encodeURIComponent(`Medication reminder for ${name} - ${dose}\nFrequency: ${frequency}`);
+    const start = formatGoogleDate(startDate);
+    const end = formatGoogleDate(endDate);
+    
+    const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&dates=${start}/${end}&recur=RRULE:FREQ=DAILY;COUNT=30`;
+    
+    window.open(url, '_blank');
+  };
+
+  // 2. Add to Apple Calendar (.ics file)
+  const addToAppleCalendar = (name, dose, time, frequency) => {
+    const now = new Date();
+    const [hours, minutes] = time.split(':');
+    const startDate = new Date(now);
+    startDate.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+    
+    if (startDate < now) {
+      startDate.setDate(startDate.getDate() + 1);
+    }
+    
+    const endDate = new Date(startDate);
+    endDate.setMinutes(endDate.getMinutes() + 30);
+    
+    const formatICSDate = (date) => {
+      return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+    };
+    
+    const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//NORM//Medication Reminder//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:${Date.now()}-norm-medication
+DTSTAMP:${formatICSDate(now)}
+DTSTART:${formatICSDate(startDate)}
+DTEND:${formatICSDate(endDate)}
+SUMMARY:💊 Take ${name} (${dose})
+DESCRIPTION:Medication reminder for ${name} - ${dose}\nFrequency: ${frequency}
+CATEGORIES:HEALTH,MEDICATION
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-PT10M
+ACTION:DISPLAY
+DESCRIPTION:Reminder: Time to take your medication
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-PT5M
+ACTION:DISPLAY
+DESCRIPTION:Reminder: Time to take your medication (5 min)
+END:VALARM
+END:VEVENT
+END:VCALENDAR`;
+    
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `NORM_Medication_${name.replace(/\s/g, '_')}.ics`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(link.href);
+  };
+
+  // 3. Add to Outlook Calendar
+  const addToOutlookCalendar = (name, dose, time, frequency) => {
+    const now = new Date();
+    const [hours, minutes] = time.split(':');
+    const startDate = new Date(now);
+    startDate.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+    
+    if (startDate < now) {
+      startDate.setDate(startDate.getDate() + 1);
+    }
+    
+    const endDate = new Date(startDate);
+    endDate.setMinutes(endDate.getMinutes() + 30);
+    
+    const formatOutlookDate = (date) => {
+      return date.toISOString().replace(/[-:]/g, '').split('.')[0];
+    };
+    
+    const subject = encodeURIComponent(`💊 Take ${name} (${dose})`);
+    const body = encodeURIComponent(`Medication reminder for ${name} - ${dose}\nFrequency: ${frequency}`);
+    const start = formatOutlookDate(startDate);
+    const end = formatOutlookDate(endDate);
+    
+    const url = `https://outlook.office.com/calendar/action/compose?subject=${subject}&body=${body}&startdt=${start}&enddt=${end}`;
+    
+    window.open(url, '_blank');
+  };
+
+  // 4. Add to Yahoo Calendar
+  const addToYahooCalendar = (name, dose, time, frequency) => {
+    const now = new Date();
+    const [hours, minutes] = time.split(':');
+    const startDate = new Date(now);
+    startDate.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+    
+    if (startDate < now) {
+      startDate.setDate(startDate.getDate() + 1);
+    }
+    
+    const endDate = new Date(startDate);
+    endDate.setMinutes(endDate.getMinutes() + 30);
+    
+    const formatYahooDate = (date) => {
+      return date.toISOString().replace(/[-:]/g, '').split('.')[0];
+    };
+    
+    const title = encodeURIComponent(`💊 Take ${name} (${dose})`);
+    const details = encodeURIComponent(`Medication reminder for ${name} - ${dose}\nFrequency: ${frequency}`);
+    const start = formatYahooDate(startDate);
+    const end = formatYahooDate(endDate);
+    
+    const url = `https://calendar.yahoo.com/?v=60&title=${title}&st=${start}&et=${end}&desc=${details}`;
+    
+    window.open(url, '_blank');
+  };
+
+  // Handle medication form submission
   const handleMedicationSubmit = (e) => {
     e.preventDefault();
     
@@ -366,23 +426,46 @@ END:VCALENDAR`;
     setMedications([...medications, newMedication]);
     setShowMedicationForm(false);
 
-    // If reminder is enabled, create calendar event
+    // If reminder is enabled, show calendar options
     if (medicationFormData.reminder) {
-      createCalendarEvent(
-        medicationFormData.name,
-        medicationFormData.dose,
-        medicationFormData.time,
-        medicationFormData.frequency
-      );
-      
-      setSavedMessage(`✅ Reminder set for ${medicationFormData.name} at ${medicationFormData.time}`);
-      setShowReminderSuccess(true);
-      setTimeout(() => {
-        setShowReminderSuccess(false);
-        setSavedMessage('');
-      }, 4000);
+      setPendingMedication(newMedication);
+      setShowCalendarOptions(true);
+    } else {
+      setMedicationFormData({
+        name: '',
+        dose: '',
+        time: '08:00',
+        frequency: 'Once daily',
+        reminder: false
+      });
     }
+  };
 
+  // Handle calendar selection
+  const handleCalendarSelect = (type) => {
+    if (!pendingMedication) return;
+    
+    const { name, dose, time, frequency } = pendingMedication;
+    
+    switch(type) {
+      case 'google':
+        addToGoogleCalendar(name, dose, time, frequency);
+        break;
+      case 'apple':
+        addToAppleCalendar(name, dose, time, frequency);
+        break;
+      case 'outlook':
+        addToOutlookCalendar(name, dose, time, frequency);
+        break;
+      case 'yahoo':
+        addToYahooCalendar(name, dose, time, frequency);
+        break;
+      default:
+        break;
+    }
+    
+    setShowCalendarOptions(false);
+    setPendingMedication(null);
     setMedicationFormData({
       name: '',
       dose: '',
@@ -390,6 +473,13 @@ END:VCALENDAR`;
       frequency: 'Once daily',
       reminder: false
     });
+    
+    setSavedMessage(`✅ Reminder set for ${name} at ${time}`);
+    setShowReminderSuccess(true);
+    setTimeout(() => {
+      setShowReminderSuccess(false);
+      setSavedMessage('');
+    }, 4000);
   };
 
   // Handle marking medication as taken
@@ -1007,6 +1097,90 @@ END:VCALENDAR`;
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Calendar Options Modal */}
+      {showCalendarOptions && (
+        <div className="modal-overlay" onClick={() => setShowCalendarOptions(false)}>
+          <div className="modal-content calendar-options" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>Choose Your Calendar</h2>
+              <button className="modal-close" onClick={() => setShowCalendarOptions(false)}>
+                <CloseIcon />
+              </button>
+            </div>
+            
+            <div className="calendar-options-grid">
+              <button 
+                className="calendar-option google"
+                onClick={() => handleCalendarSelect('google')}
+              >
+                <svg viewBox="0 0 24 24" fill="#4285F4">
+                  <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/>
+                  <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                  <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                  <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                </svg>
+                <span>Google Calendar</span>
+                <small>Opens in new tab</small>
+              </button>
+              
+              <button 
+                className="calendar-option apple"
+                onClick={() => handleCalendarSelect('apple')}
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="1.5">
+                  <rect x="3" y="4" width="18" height="18" rx="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                  <circle cx="12" cy="14" r="1"/>
+                  <circle cx="8" cy="14" r="1"/>
+                  <circle cx="16" cy="14" r="1"/>
+                </svg>
+                <span>Apple Calendar</span>
+                <small>Downloads .ics file</small>
+              </button>
+              
+              <button 
+                className="calendar-option outlook"
+                onClick={() => handleCalendarSelect('outlook')}
+              >
+                <svg viewBox="0 0 24 24" fill="#0078D4">
+                  <rect x="2" y="4" width="20" height="18" rx="2"/>
+                  <path d="M8 2v4"/>
+                  <path d="M16 2v4"/>
+                  <path d="M2 10h20"/>
+                  <path d="M10 14h4"/>
+                  <path d="M10 18h4"/>
+                </svg>
+                <span>Outlook Calendar</span>
+                <small>Opens in new tab</small>
+              </button>
+              
+              <button 
+                className="calendar-option yahoo"
+                onClick={() => handleCalendarSelect('yahoo')}
+              >
+                <svg viewBox="0 0 24 24" fill="#6001D2">
+                  <rect x="3" y="4" width="18" height="18" rx="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                  <circle cx="12" cy="15" r="1"/>
+                  <circle cx="8" cy="15" r="1"/>
+                  <circle cx="16" cy="15" r="1"/>
+                </svg>
+                <span>Yahoo Calendar</span>
+                <small>Opens in new tab</small>
+              </button>
+            </div>
+            
+            <p className="calendar-options-note">
+              Your medication reminder will be added to your calendar with a 10-minute alert.
+            </p>
           </div>
         </div>
       )}
