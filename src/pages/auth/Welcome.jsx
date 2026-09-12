@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Auth.css';
-import normLogo from '../assets/normfull.png';
+import normLogo from '../../assets/normfull.png';
 
 // Hamburger Icon
 const HamburgerIcon = ({ isOpen }) => (
