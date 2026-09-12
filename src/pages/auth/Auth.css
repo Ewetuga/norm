@@ -3454,3 +3454,67 @@
     border-top-color: #E8F4F6;
   }
 }
+
+
+/* ========================================
+   NAVBAR LOGO IMAGE
+   ======================================== */
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo-img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* ========================================
+   FOOTER LOGO IMAGE
+   ======================================== */
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.footer-logo-img {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* ========================================
+   RESPONSIVE LOGO
+   ======================================== */
+
+@media (max-width: 480px) {
+  .navbar-logo-img {
+    height: 32px;
+  }
+
+  .footer-logo-img {
+    height: 28px;
+  }
+}
+
+@media (max-width: 360px) {
+  .navbar-logo-img {
+    height: 28px;
+  }
+
+  .footer-logo-img {
+    height: 24px;
+  }
+}
+
+/* Dark Mode - Invert logo colors if needed */
+@media (prefers-color-scheme: dark) {
+  .navbar-logo-img,
+  .footer-logo-img {
+    filter: brightness(0) invert(1);
+  }
+}

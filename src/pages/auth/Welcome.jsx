@@ -1,21 +1,7 @@
-import React, { useState , useEffect  } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Auth.css';
-
-// NORM Logo
-const NormLogo = () => (
-  <svg className="norm-logo-svg" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 52 L12 14" stroke="#1B4F72" strokeWidth="7" strokeLinecap="round" fill="none"/>
-    <path d="M12 14 L26 28" stroke="#1B4F72" strokeWidth="7" strokeLinecap="round" fill="none"/>
-    <path d="M30 32 L46 48" stroke="#1B4F72" strokeWidth="7" strokeLinecap="round" fill="none"/>
-    <path d="M46 14 L46 52" stroke="#1B4F72" strokeWidth="7" strokeLinecap="round" fill="none"/>
-    <circle cx="12" cy="14" r="4" fill="#1B4F72" />
-    <circle cx="46" cy="14" r="4" fill="#1B4F72" />
-    <circle cx="46" cy="52" r="4" fill="#1B4F72" />
-    <circle cx="26" cy="28" r="3.5" fill="#1B4F72" />
-    <circle cx="30" cy="32" r="3.5" fill="#1B4F72" />
-  </svg>
-);
+import normLogo from '../assets/normfull.png';
 
 // Hamburger Icon
 const HamburgerIcon = ({ isOpen }) => (
@@ -105,29 +91,10 @@ const UserIcon = () => (
   </svg>
 );
 
-const MailIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-    <polyline points="22,6 12,13 2,6"/>
-  </svg>
-);
-
-const PhoneIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-  </svg>
-);
-
-const LocationIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-    <circle cx="12" cy="10" r="3"/>
-  </svg>
-);
-
 const Welcome = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-    useEffect(() => {
+
+  useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
@@ -156,8 +123,7 @@ const Welcome = () => {
       <nav className="navbar">
         <div className="navbar-container">
           <div className="navbar-logo">
-            <NormLogo />
-            <span>NORM</span>
+            <img src={normLogo} alt="NORM" className="navbar-logo-img" />
           </div>
           <div className="navbar-links">
             <a href="#how-it-helps" onClick={(e) => scrollToSection(e, 'how-it-helps')}>How it helps</a>
@@ -396,7 +362,7 @@ const Welcome = () => {
                   loading="lazy"
                 />
                 <div className="reading-image-text">
-                  <span>Your readings can be saved on your devics</span>
+                  <span>Your readings can be saved on your device</span>
                 </div>
               </div>
             </div>
@@ -405,7 +371,7 @@ const Welcome = () => {
       </section>
 
       {/* ===== WHAT'S INSIDE ===== */}
-      <section className="inside-section" id="features">
+      <section className="inside-section">
         <div className="section-container">
           <div className="section-header">
             <h2>What's inside</h2>
@@ -480,8 +446,6 @@ const Welcome = () => {
             <div className="trust-image">
               <div className="trust-image-glass">
                 <ShieldIcon />
-                {/* <h3>Early users are shaping NORM</h3>
-                <p>We're building in the open with the people who'll rely on it — join them and help us get it right.</p> */}
                 <Link to="/signup" className="btn btn-primary btn-small">Sign up today</Link>
               </div>
             </div>
@@ -556,8 +520,7 @@ const Welcome = () => {
           <div className="footer-grid">
             <div className="footer-brand">
               <div className="footer-logo">
-                <NormLogo />
-                <span>NORM</span>
+                <img src={normLogo} alt="NORM" className="footer-logo-img" />
               </div>
               <p className="footer-tagline">Understand. Monitor. Manage.</p>
               <p className="footer-description">
