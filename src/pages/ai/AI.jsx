@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './AI.css';
 
 // SVG Icons
@@ -40,6 +40,16 @@ const AI = () => {
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  
+  // Ref for the chat container to enable auto-scroll
+  const chatRef = useRef(null);
+
+  // Auto-scroll to bottom whenever messages change or loading state changes
+  useEffect(() => {
+    if (chatRef.current) {
+      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    }
+  }, [messages, isLoading]);
 
   const handleSend = () => {
     if (!input.trim()) return;
@@ -70,7 +80,8 @@ const AI = () => {
         </div>
       </div>
 
-      <div className="ai-chat">
+      {/* Add ref to the chat container */}
+      <div className="ai-chat" ref={chatRef}>
         {messages.map((msg, idx) => (
           <div key={idx} className={`chat-message ${msg.type}`}>
             <div className="chat-avatar">

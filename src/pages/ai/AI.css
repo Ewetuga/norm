@@ -1,13 +1,14 @@
 /* ========================================
-   AI PAGE - NATURAL CHAT FLOW
+   AI PAGE - WHATSAPP STYLE CHAT
    ======================================== */
 
 .ai-page {
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 180px);
-  height: auto;
+  /* Full height minus header (approx 120px) and bottom nav (72px) */
+  height: calc(100vh - 180px);
   animation: fadeInUp 0.5s ease-out;
+  overflow: hidden;
 }
 
 @keyframes fadeInUp {
@@ -21,13 +22,14 @@
   }
 }
 
-/* ---------- HEADER ---------- */
+/* ---------- HEADER (fixed at top) ---------- */
 .ai-header {
   display: flex;
   align-items: center;
   gap: 14px;
   margin-bottom: 16px;
   padding: 4px 0;
+  flex-shrink: 0;
 }
 
 .ai-header-icon {
@@ -61,13 +63,17 @@
   color: #5A6570;
 }
 
-/* ---------- CHAT AREA - GROWS NATURALLY ---------- */
+/* ---------- CHAT AREA (scrollable, takes remaining space) ---------- */
 .ai-chat {
+  flex: 1;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 12px;
   padding: 8px 4px 16px;
-  flex: 1;
+  min-height: 0;
+  /* Push content to top when short, scroll when long */
+  justify-content: flex-start;
 }
 
 .ai-chat::-webkit-scrollbar {
@@ -89,6 +95,7 @@
   gap: 10px;
   align-items: flex-start;
   animation: messageSlide 0.3s ease-out;
+  flex-shrink: 0;
 }
 
 @keyframes messageSlide {
@@ -198,13 +205,14 @@
   30% { transform: translateY(-8px); opacity: 1; }
 }
 
-/* ---------- INPUT AREA - MOVES DOWN WITH CONTENT ---------- */
+/* ---------- INPUT AREA (fixed at bottom) ---------- */
 .ai-input-area {
   display: flex;
   gap: 10px;
   padding: 14px 0 4px;
   border-top: 1px solid rgba(17, 87, 97, 0.1);
-  margin-top: auto;
+  flex-shrink: 0;
+  background: transparent;
 }
 
 .ai-input-area .form-control {
@@ -279,7 +287,7 @@
 
 @media (max-width: 768px) {
   .ai-page {
-    min-height: calc(100vh - 160px);
+    height: calc(100vh - 160px);
   }
 
   .chat-bubble {
@@ -291,7 +299,7 @@
 
 @media (max-width: 480px) {
   .ai-page {
-    min-height: calc(100vh - 140px);
+    height: calc(100vh - 140px);
   }
 
   .ai-header-icon {
@@ -358,7 +366,7 @@
 
 @media (max-width: 360px) {
   .ai-page {
-    min-height: calc(100vh - 130px);
+    height: calc(100vh - 130px);
   }
 
   .ai-header {
