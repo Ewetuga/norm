@@ -1,12 +1,13 @@
 /* ========================================
-   AI PAGE - GENTLE & RESPONSIVE
+   AI PAGE - FULL HEIGHT CHAT
    ======================================== */
 
 .ai-page {
   display: flex;
   flex-direction: column;
+  /* Take full viewport height minus header/nav */
   height: calc(100vh - 180px);
-  max-height: 650px;
+  max-height: none;
   animation: fadeInUp 0.5s ease-out;
 }
 
@@ -28,6 +29,7 @@
   gap: 14px;
   margin-bottom: 16px;
   padding: 4px 0;
+  flex-shrink: 0;
 }
 
 .ai-header-icon {
@@ -61,16 +63,17 @@
   color: #5A6570;
 }
 
-/* ---------- CHAT AREA ---------- */
+/* ---------- CHAT AREA - TAKES FULL HEIGHT ---------- */
 .ai-chat {
   flex: 1;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 8px 4px 12px;
-  margin-bottom: 16px;
+  padding: 8px 4px 16px;
+  margin-bottom: 0;
   scroll-behavior: smooth;
+  min-height: 0;
 }
 
 .ai-chat::-webkit-scrollbar {
@@ -201,13 +204,13 @@
   30% { transform: translateY(-8px); opacity: 1; }
 }
 
-/* ---------- INPUT AREA ---------- */
+/* ---------- INPUT AREA - FIXED AT BOTTOM ---------- */
 .ai-input-area {
   display: flex;
   gap: 10px;
-  padding: 4px 0;
+  padding: 14px 0 4px;
   border-top: 1px solid rgba(17, 87, 97, 0.1);
-  padding-top: 14px;
+  flex-shrink: 0;
 }
 
 .ai-input-area .form-control {
@@ -284,7 +287,6 @@
 @media (max-width: 768px) {
   .ai-page {
     height: calc(100vh - 160px);
-    max-height: 550px;
   }
 
   .chat-bubble {
@@ -297,8 +299,7 @@
 /* Mobile Phones */
 @media (max-width: 480px) {
   .ai-page {
-    height: calc(100vh - 150px);
-    max-height: 450px;
+    height: calc(100vh - 140px);
   }
 
   .ai-header-icon {
@@ -366,8 +367,7 @@
 /* Very Small Phones */
 @media (max-width: 360px) {
   .ai-page {
-    height: calc(100vh - 140px);
-    max-height: 400px;
+    height: calc(100vh - 130px);
   }
 
   .ai-header {
@@ -431,8 +431,6 @@
    ======================================== */
 
 @media (prefers-color-scheme: dark) {
-  /* Header stays same gradient - visible in dark */
-  
   .ai-header-text h2 {
     color: #F0E6D3;
   }
@@ -449,7 +447,7 @@
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
   }
 
-  /* User bubble stays gradient */
+  /* User bubble stays teal */
   .chat-message.user .chat-bubble {
     background: linear-gradient(135deg, #115761, #1a7a8a);
     color: #FFFFFF;
@@ -466,7 +464,7 @@
     stroke: #FFFFFF;
   }
 
-  /* User avatar stays teal-tinted */
+  /* User avatar */
   .chat-message.user .chat-avatar {
     background: rgba(255, 255, 255, 0.08);
     border-color: rgba(255, 255, 255, 0.1);
