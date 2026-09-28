@@ -426,20 +426,13 @@
 }
 
 /* ========================================
-   DARK MODE - PREMIUM WARM
+   DARK MODE
+   White bot bubbles maintained
    ======================================== */
 
 @media (prefers-color-scheme: dark) {
-  .ai-header-icon {
-    background: linear-gradient(135deg, #E08E5B, #F0A87A);
-    box-shadow: 0 4px 16px rgba(224, 142, 91, 0.25);
-  }
-
-  .ai-header-icon svg {
-    color: #1A1816;
-    stroke: #1A1816;
-  }
-
+  /* Header stays same gradient - visible in dark */
+  
   .ai-header-text h2 {
     color: #F0E6D3;
   }
@@ -448,52 +441,50 @@
     color: #A89888;
   }
 
+  /* Bot bubble stays WHITE */
   .chat-message.bot .chat-bubble {
-    background: rgba(30, 28, 26, 0.6);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-color: rgba(200, 180, 160, 0.08);
-    color: #F0E6D3;
+    background: #FFFFFF;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #1A1A1A;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
   }
 
+  /* User bubble stays gradient */
   .chat-message.user .chat-bubble {
-    background: linear-gradient(135deg, #E08E5B, #C4784A);
-    color: #1A1816;
-    box-shadow: 0 2px 12px rgba(224, 142, 91, 0.25);
+    background: linear-gradient(135deg, #115761, #1a7a8a);
+    color: #FFFFFF;
+    box-shadow: 0 2px 12px rgba(17, 87, 97, 0.3);
   }
 
-  .chat-avatar {
-    background: rgba(200, 180, 160, 0.06);
-    border-color: rgba(200, 180, 160, 0.1);
-  }
-
+  /* Bot avatar stays teal */
   .chat-message.bot .chat-avatar {
-    background: linear-gradient(135deg, #E08E5B, #F0A87A);
-    box-shadow: 0 2px 8px rgba(224, 142, 91, 0.2);
+    background: linear-gradient(135deg, #115761, #1a7a8a);
   }
 
   .chat-message.bot .chat-avatar svg {
-    color: #1A1816;
-    stroke: #1A1816;
+    color: #FFFFFF;
+    stroke: #FFFFFF;
   }
 
+  /* User avatar stays teal-tinted */
   .chat-message.user .chat-avatar {
-    background: rgba(200, 180, 160, 0.08);
-    border-color: rgba(200, 180, 160, 0.15);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.1);
   }
 
   .chat-message.user .chat-avatar svg {
-    color: #E08E5B;
-    stroke: #E08E5B;
+    color: #1a7a8a;
+    stroke: #1a7a8a;
   }
 
+  /* Input area */
   .ai-input-area {
-    border-top-color: rgba(200, 180, 160, 0.08);
+    border-top-color: rgba(255, 255, 255, 0.08);
   }
 
   .ai-input-area .form-control {
-    background: rgba(30, 28, 26, 0.5);
-    border-color: rgba(200, 180, 160, 0.1);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.12);
     color: #F0E6D3;
   }
 
@@ -502,36 +493,37 @@
   }
 
   .ai-input-area .form-control:focus {
-    border-color: #E08E5B;
-    box-shadow: 0 0 0 4px rgba(224, 142, 91, 0.12);
+    border-color: #1a7a8a;
+    box-shadow: 0 0 0 4px rgba(26, 122, 138, 0.15);
+    background: rgba(255, 255, 255, 0.08);
   }
 
+  /* Send button stays teal */
   .ai-input-area .btn {
-    background: linear-gradient(135deg, #E08E5B, #F0A87A);
-    color: #1A1816;
-    box-shadow: 0 4px 16px rgba(224, 142, 91, 0.25);
+    background: linear-gradient(135deg, #115761, #1a7a8a);
   }
 
   .ai-input-area .btn:hover:not(:disabled) {
-    background: linear-gradient(135deg, #F0A87A, #E08E5B);
-    box-shadow: 0 6px 24px rgba(224, 142, 91, 0.35);
+    background: linear-gradient(135deg, #0d4550, #115761);
   }
 
   .ai-input-area .btn svg {
-    color: #1A1816;
-    stroke: #1A1816;
+    color: #FFFFFF;
+    stroke: #FFFFFF;
   }
 
+  /* Scrollbar */
   .ai-chat::-webkit-scrollbar-thumb {
-    background: rgba(200, 180, 160, 0.15);
+    background: rgba(255, 255, 255, 0.1);
   }
 
+  /* Typing indicator stays WHITE */
   .chat-bubble.typing {
-    background: rgba(30, 28, 26, 0.6);
-    border-color: rgba(200, 180, 160, 0.08);
+    background: #FFFFFF;
+    border-color: rgba(255, 255, 255, 0.1);
   }
 
   .chat-bubble.typing .typing-dot {
-    background: #E08E5B;
+    background: #115761;
   }
 }
