@@ -1,13 +1,12 @@
 /* ========================================
-   AI PAGE - FULL HEIGHT CHAT
+   AI PAGE - NATURAL CHAT FLOW
    ======================================== */
 
 .ai-page {
   display: flex;
   flex-direction: column;
-  /* Take full viewport height minus header/nav */
-  height: calc(100vh - 180px);
-  max-height: none;
+  min-height: calc(100vh - 180px);
+  height: auto;
   animation: fadeInUp 0.5s ease-out;
 }
 
@@ -29,7 +28,6 @@
   gap: 14px;
   margin-bottom: 16px;
   padding: 4px 0;
-  flex-shrink: 0;
 }
 
 .ai-header-icon {
@@ -63,17 +61,13 @@
   color: #5A6570;
 }
 
-/* ---------- CHAT AREA - TAKES FULL HEIGHT ---------- */
+/* ---------- CHAT AREA - GROWS NATURALLY ---------- */
 .ai-chat {
-  flex: 1;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 12px;
   padding: 8px 4px 16px;
-  margin-bottom: 0;
-  scroll-behavior: smooth;
-  min-height: 0;
+  flex: 1;
 }
 
 .ai-chat::-webkit-scrollbar {
@@ -204,13 +198,13 @@
   30% { transform: translateY(-8px); opacity: 1; }
 }
 
-/* ---------- INPUT AREA - FIXED AT BOTTOM ---------- */
+/* ---------- INPUT AREA - MOVES DOWN WITH CONTENT ---------- */
 .ai-input-area {
   display: flex;
   gap: 10px;
   padding: 14px 0 4px;
   border-top: 1px solid rgba(17, 87, 97, 0.1);
-  flex-shrink: 0;
+  margin-top: auto;
 }
 
 .ai-input-area .form-control {
@@ -283,10 +277,9 @@
 
 /* ---------- RESPONSIVE ---------- */
 
-/* Tablets */
 @media (max-width: 768px) {
   .ai-page {
-    height: calc(100vh - 160px);
+    min-height: calc(100vh - 160px);
   }
 
   .chat-bubble {
@@ -296,10 +289,9 @@
   }
 }
 
-/* Mobile Phones */
 @media (max-width: 480px) {
   .ai-page {
-    height: calc(100vh - 140px);
+    min-height: calc(100vh - 140px);
   }
 
   .ai-header-icon {
@@ -364,10 +356,9 @@
   }
 }
 
-/* Very Small Phones */
 @media (max-width: 360px) {
   .ai-page {
-    height: calc(100vh - 130px);
+    min-height: calc(100vh - 130px);
   }
 
   .ai-header {
@@ -427,7 +418,6 @@
 
 /* ========================================
    DARK MODE
-   White bot bubbles maintained
    ======================================== */
 
 @media (prefers-color-scheme: dark) {
@@ -439,7 +429,6 @@
     color: #A89888;
   }
 
-  /* Bot bubble stays WHITE */
   .chat-message.bot .chat-bubble {
     background: #FFFFFF;
     border-color: rgba(255, 255, 255, 0.1);
@@ -447,14 +436,12 @@
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
   }
 
-  /* User bubble stays teal */
   .chat-message.user .chat-bubble {
     background: linear-gradient(135deg, #115761, #1a7a8a);
     color: #FFFFFF;
     box-shadow: 0 2px 12px rgba(17, 87, 97, 0.3);
   }
 
-  /* Bot avatar stays teal */
   .chat-message.bot .chat-avatar {
     background: linear-gradient(135deg, #115761, #1a7a8a);
   }
@@ -464,7 +451,6 @@
     stroke: #FFFFFF;
   }
 
-  /* User avatar */
   .chat-message.user .chat-avatar {
     background: rgba(255, 255, 255, 0.08);
     border-color: rgba(255, 255, 255, 0.1);
@@ -475,7 +461,6 @@
     stroke: #1a7a8a;
   }
 
-  /* Input area */
   .ai-input-area {
     border-top-color: rgba(255, 255, 255, 0.08);
   }
@@ -496,7 +481,6 @@
     background: rgba(255, 255, 255, 0.08);
   }
 
-  /* Send button stays teal */
   .ai-input-area .btn {
     background: linear-gradient(135deg, #115761, #1a7a8a);
   }
@@ -510,12 +494,10 @@
     stroke: #FFFFFF;
   }
 
-  /* Scrollbar */
   .ai-chat::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.1);
   }
 
-  /* Typing indicator stays WHITE */
   .chat-bubble.typing {
     background: #FFFFFF;
     border-color: rgba(255, 255, 255, 0.1);
