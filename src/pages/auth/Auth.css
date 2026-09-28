@@ -3518,3 +3518,28 @@
     filter: brightness(0) invert(1);
   }
 }
+
+
+/* ========================================
+   AUTH PAGE LOGO IMAGE
+   ======================================== */
+
+.auth-logo-img {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .auth-logo-img {
+    height: 40px;
+  }
+}
+
+@media (max-width: 360px) {
+  .auth-logo-img {
+    height: 36px;
+  }
+}
